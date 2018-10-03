@@ -1,0 +1,97 @@
+#resume-card {
+	.head {
+		display: flex;
+		align-items: center;
+		margin: 0;
+		padding: 10px 0 10px 20px;
+
+		h3 {
+			margin: 0;
+		}
+
+		.icon {
+			width: 32px;
+			height: 28px;
+			margin-right: 12px;
+			color: @secondary-color;
+		}
+	}
+
+	.period {
+		position: relative;
+		font-size: 11px;
+		font-weight: 500;
+		color: @minor-color;
+		line-height: 18px;
+		margin: 0 0 10px 0;
+		text-transform: uppercase;
+
+		&::before {
+			content: '';
+			display: block;
+			position: absolute;
+			width: 9px;
+			height: 9px;
+			left: -25px;
+			top: 4px;
+			border-radius: 50%;
+			background-color: @main-color;
+		}
+
+		&.continuous {
+			color: @secondary-color;
+
+			&::before {
+				background-color: @secondary-color;
+			}
+		}
+	}
+
+	.place {
+		margin-bottom: 10px;
+	}
+
+	.name {
+		margin-bottom: 8px;
+	}
+
+	.progress-bar {
+		position: relative;
+		width: 100%;
+		height: 4px;
+		background-color: @progress-background;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 4px;
+			background-color: @secondary-color;
+		}
+
+		&.css::before {
+			width: @css-width;
+		}
+
+		&.js::before {
+			width: @js-width;
+		}
+
+		&.jquery::before {
+			width: @jquery-width;
+		}
+
+		&.react::before {
+			width: @react-width;
+		}
+
+		&.python::before {
+			width: @python-width;
+		}
+
+		&.django::before {
+			width: @django-width;
+		}
+	}
+}

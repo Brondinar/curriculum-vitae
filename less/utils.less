@@ -1,0 +1,39 @@
+// Файл описывает вспомогательные стили: разметку а-ля bootstrap и прочее
+
+.row {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	padding: 0;
+
+	.col {
+		position: relative;
+		box-sizing: border-box;
+
+		&.col-1 {
+			width: 100%;
+
+			&:not(:first-of-type) {
+				&::before {
+					.horizontal-line();
+				}
+			}
+		}
+
+		&.col-2 {
+			width: 50%;
+
+			&:not(:first-of-type):not(:nth-of-type(2)) {
+				&::before {
+					.horizontal-line();
+				}
+			}
+
+			&:nth-of-type(2n) {
+				&::after {
+					.vertical-line();
+				}
+			}
+		}
+	}
+}

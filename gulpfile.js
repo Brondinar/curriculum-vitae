@@ -66,8 +66,16 @@ gulp.task('style', function() {
 		.pipe(reload({ stream: true }));
 });
 
-gulp.task('js', function() {
-	return gulp.src('js/**/*.js')
+gulp.task('js-plugins', function() {
+	return gulp.src('js/**/*.min.js')
+		.pipe(gulp.dest(params.out))
+		.pipe(reload({ stream: true }))
+
+	callback();
+});
+
+gulp.task('js', gulp.series('js-plugins', function() {
+	return gulp.src(['js/**/*.js', '!js/**/*.min.js'])
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(rollup({plugins: [babel()]}, {format: 'iife'}))
@@ -78,7 +86,7 @@ gulp.task('js', function() {
 		.pipe(rename('scripts.min.js'))
 		.pipe(gulp.dest(params.out))
 		.pipe(reload({ stream: true }));
-});
+}));
 
 gulp.task('build', gulp.series('html', 'image', 'font', 'style', 'js'));
 

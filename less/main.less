@@ -1,0 +1,121 @@
+// Основной файл, описывающий ключевые моменты
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+	letter-spacing: 0em;
+	color: @common-color;
+	background-color: @body-background;
+}
+
+.root {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 480px;
+	height: 600px;
+	margin: -300px 0 0 -240px;
+	transform: translateX(-240px);
+}
+
+.inner-card {
+	position: absolute;
+	overflow: hidden;
+	visibility: hidden;
+	top: 15px;
+	left: 95%;
+	width: 120%;
+	height: 570px;
+	background: @card-background;
+	z-index: 5;
+}
+
+.inner-card-content {
+	padding: 30px 30px 30px 40px;
+
+	h2, p {
+		margin: 0;
+		padding: 0;
+	}
+
+	.article {
+		margin-bottom: 60px;
+	}
+
+	.heading {
+		position: relative;
+		margin-bottom: 20px;
+		margin-left: 20px;
+		font-size: 17px;
+		line-height: 21px;
+		font-weight: 500;
+		color: @main-color;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: -12px;
+			width: 30px;
+			height: 30px;
+			background: @circle-gradient;
+			border-radius: 50%;
+			z-index: -1;
+		}
+	}
+
+	.article-content {
+		position: relative;
+		font-size: 14px;
+
+		&::before {
+			.horizontal-line();
+			top: 0;
+			left: -60px;
+		}
+
+		&::after {
+			.vertical-line();
+		}
+	}
+
+	strong {
+		.strong-text();
+	}
+}
+
+@media (max-width: 1072px) {
+	.root {
+		width: 440;
+		margin: -300px 0 0 -220px;
+		transform: translateX(-204px);
+	}
+}
+
+@media (max-width: 1023px) {
+	.root {
+		position: relative;
+		top: 0;
+		left: 0;
+		transform: none;
+		margin: 0 auto;
+		max-width: @width-1023;
+		width: auto;
+	}
+}
+
+@media (max-width: 560px) {
+	.root {
+		margin: 0 0px;
+		width: auto;
+		max-width: 100%;
+	}
+}
+
+@font-face { 
+	font-family: "Poppins";
+	src: local("Poppins Medium"), local("Poppins-Medium"), url("https://fonts.gstatic.com/s/poppins/v5/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 500; 
+	unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
