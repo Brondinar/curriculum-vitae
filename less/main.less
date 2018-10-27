@@ -1,12 +1,44 @@
 // Основной файл, описывающий ключевые моменты
 
+@font-face { 
+	font-family: "Century Gothic";
+	src: 
+		local("Century Gothic"),
+		url("fonts/gothic.ttf") format("ttf"),
+		url("fonts/CenturyGothic.woff") format("woff");
+	font-style: normal;
+	font-weight: 500;
+}
+
+@keyframes moveOut {
+	from {
+		transform: translateX(80%);
+	}
+
+	to {
+		transform: translateX(0);
+	}
+}
+
+@keyframes moveIn {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(80%);
+	}
+}
+
 body {
 	margin: 0;
 	padding: 0;
-	font-family: 'Poppins', sans-serif;
+	font-family: "Century Gothic", sans-serif;
 	letter-spacing: 0em;
 	color: @common-color;
 	background-color: @body-background;
+	scroll-behavior: 'smooth';
+	overflow: auto;
 }
 
 .root {
@@ -24,11 +56,20 @@ body {
 	overflow: hidden;
 	visibility: hidden;
 	top: 15px;
-	left: 95%;
+	left: 0;
 	width: 120%;
 	height: 570px;
 	background: @card-background;
+	opacity: 0;
 	z-index: 5;
+	transform: translateX(0);
+	transition: opacity 0.5s linear, transform 1s ease, visibility 1s linear;
+
+	&.inner-card_open {
+		visibility: visible;
+		opacity: 1;
+		transform: translateX(80%);
+	}
 }
 
 .inner-card-content {
@@ -49,7 +90,7 @@ body {
 		margin-left: 20px;
 		font-size: 17px;
 		line-height: 21px;
-		font-weight: 500;
+		font-weight: 600;
 		color: @main-color;
 
 		&::before {
@@ -71,7 +112,7 @@ body {
 		&::before {
 			.horizontal-line();
 			top: 0;
-			left: -60px;
+			left: -40px;
 		}
 
 		&::after {
@@ -101,6 +142,20 @@ body {
 		margin: 0 auto;
 		max-width: @width-1023;
 		width: auto;
+
+		.inner-card {
+			position: relative;
+			visibility: visible;
+			opacity: 1;
+			width: 100%;
+			height: auto;
+			margin-bottom: 15px;
+			overflow: visible;
+
+			&.inner-card_open {
+				transform: none;
+			}
+		}
 	}
 }
 
@@ -110,12 +165,4 @@ body {
 		width: auto;
 		max-width: 100%;
 	}
-}
-
-@font-face { 
-	font-family: "Poppins";
-	src: local("Poppins Medium"), local("Poppins-Medium"), url("https://fonts.gstatic.com/s/poppins/v5/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2") format("woff2");
-	font-style: normal;
-	font-weight: 500; 
-	unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }

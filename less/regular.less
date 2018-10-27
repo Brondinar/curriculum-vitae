@@ -1,8 +1,13 @@
 // Файл описывает часто используемые элементы - блоки, ссылки, текстовые элементы и прочее
+.text {
+	font-size: 14px;
+	margin: 0 0 20px 0;
+	line-height: 1.6;
+}
 
 .strong-text {
 	font-size: 13px;
-	font-weight: 500;
+	font-weight: 600;
 	color: @main-color;
 	text-transform: uppercase;
 }
@@ -20,6 +25,11 @@
 	text-transform: uppercase;
 }
 
+.sub {
+	font-size: 13px;
+	font-weight: 300;
+}
+
 .card {
 	background-color: @card-background;
 	border-radius: 4px;
@@ -28,14 +38,49 @@
 .link {
 	color: @main-color;
 	font-size: 12px;
-	font-weight: 500;
+	font-weight: 600;
 	text-transform: uppercase;
+	text-decoration: none;
+	.highlight-animation();
+	
 	&:hover {
 		color: @secondary-color;
+
+		.arrow {
+			background-color: @secondary-color;
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	.icon {
+		margin-left: 6px;
+	}
+}
+
+.arrow {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	width: 14px;
+	height: 2px;
+	background-color: @main-color;
+
+	&::after {
+		content: '';
+		position: absolute;
+		display: block;
+		right: 0;
+		bottom: 3px;
+		width: 57%;
+		height: 100%;
+		transform: rotate(45deg);
+		background-color: inherit;
 	}
 }
 
 .block {
 	padding: 20px;
 }
-

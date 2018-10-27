@@ -1,0 +1,69 @@
+#contacts-card {
+	.contact-form {
+		input, textarea {
+			height: 60px;
+			font-size: 13px;
+			color: @common-color;
+			border: none;
+			border-bottom: 1px solid @main-color;
+			background-color: @card-background;
+			.highlight-animation();
+
+			&:focus {
+				color: @main-color !important;
+				border: none;
+				outline: none;
+				border-bottom: 1px solid @secondary-color;
+
+				&::placeholder {
+					color: @main-color;
+				}
+			}
+
+			&.error {
+				color: @error-color;
+				border: none;
+				outline: none;
+				box-shadow: none;
+				border-bottom: 1px solid @error-color;
+			}
+		}
+
+		.contact-form__name, .contact-form__email {
+			width: 44%;
+			margin-bottom: 20px;
+		}
+
+		.contact-form__name {
+			margin-right: 40px;
+		}
+
+		.contact-form__message {
+			width: 100%;
+			height: 65px;
+			margin-bottom: 20px;
+			padding-top: 15px;
+			resize: none;
+		}
+
+		.contact-form__send {
+			line-height: 70px;
+		}
+
+		.contact-form__response_success {
+			color: @secondary-color;
+		}
+
+		.contact-form__response_error {
+			color: @error-color;
+		}
+	}
+}
+
+@media (max-width: 560px) {
+	.contact-form {
+		input {
+			width: 100% !important;
+		}
+	}
+}

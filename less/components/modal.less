@@ -1,0 +1,91 @@
+.modal {
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+
+    .modal-background {
+    	position: absolute;
+    	width: 100%;
+    	height: 100%;
+    	background-color: @modal-background;
+    	opacity: 0.8;
+    }
+
+    .modal-window {
+    	position: absolute;
+    	top: 0;
+    	left: 50%;
+    	width: 720px;
+    	height: 100%;
+    	margin-left: -360px;
+    	background-color: @card-background;
+    	overflow: auto;
+
+        .button_close {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            right: 10px;
+            width: 54px;
+            height: 54px;
+            align-items: center;
+            color: @main-color;
+            background-color: @main-shadow;
+            border-radius: 50%;
+            .highlight-animation();
+
+            &:hover {
+                color: @secondary-color;
+                cursor: pointer;
+            }
+
+            .icon {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+    	.modal-image {
+    		display: flex;
+    		justify-content: center;
+    		width: 100%;
+
+    		img {
+    			width: 100%;
+    			height: 100%;
+    		}
+    	}
+
+    	.modal-description {
+    		padding: 40px;
+
+    		.title {
+    			font-size: 25px;
+    			line-height: 33px;
+    			font-weight: 500;
+    			margin: 0 0 5px 0;
+    			color: @main-color;
+    		}
+
+    		.small-text {
+    			margin-bottom: 20px;
+    			text-transform: none;
+    		}
+    	}
+    }
+}
+
+@media (max-width: 720px) {
+    .modal-window {
+        width: 100% !important;
+        left: 0 !important;
+        margin: 0 !important;
+        // margin: 0;
+    }
+}

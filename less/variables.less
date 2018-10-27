@@ -5,14 +5,18 @@
 @minor-color: #d8dbe2;
 @extra-minor-color: #999999;
 @body-background: #26262d;
-@horizontal-line: radial-gradient(ellipse at left, rgba(197, 202, 213, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-@horizontal-right-line: radial-gradient(ellipse at right, rgba(197, 202, 213, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-@vertical-line: radial-gradient(ellipse at top, rgba(197, 202, 213, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+@line: rgba(197, 202, 213, 0.1) 0%, rgba(255, 255, 255, 0) 105%;
+@horizontal-line: linear-gradient(to right, @line);
+@horizontal-right-line: linear-gradient(to left, @line);
+@vertical-line: linear-gradient(to bottom, @line);
 @circle-gradient: linear-gradient(135deg, rgba(46, 202, 127, 0.4) 0%, rgba(46, 202, 127, 0.01) 100%);
 
 // main-card
 @card-background: #31313a;
 @width-1023: 540px;
+@main-shadow: rgba(0, 0, 0, 0.1);
+
+// header
 @header-links: 4;
 
 // resume-card
@@ -20,6 +24,13 @@
 @css-width: 76%;
 @js-width: 74%;
 @jquery-width: 65%;
-@react-width: 29%;
+@react-width: 50%;
 @python-width: 70%;
-@django-width: 38%;
+@django-width: 50%;
+
+// works-card
+@image-hover-background: linear-gradient(135deg, rgba(46, 202, 127, 0.4) 0%, rgba(46, 202, 127, 0.01) 100%);
+
+// modal
+@modal-background: #0b0b0b;
+@error-color: #ff0000;

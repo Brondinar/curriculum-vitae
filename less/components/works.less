@@ -1,0 +1,59 @@
+#works-card {
+	.block-work {
+		text-align: center;
+
+		&:hover .image__hover {
+			opacity: 1 !important;
+		}
+
+		.image {
+			position: relative;
+			display: block;
+			width: 100%;
+			height: 100%;
+			max-width: 100%;
+			font-size: 0;
+			margin-bottom: 15px;
+
+			&:focus {
+				outline: none;
+			}
+
+			.image__img {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+
+			.image__hover {
+				position: absolute;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				top: 0;
+				left: 0;
+				opacity: 0;
+				width: 100%;
+				height: 100%;
+				background: @image-hover-background;
+				.highlight-animation();
+
+				.icon {
+					width: 32px;
+					height: 32px;
+					color: white;
+				}
+			}
+		}
+
+		.work-title {
+			font-size: 13px;
+			line-height: 22px;
+			text-align: center;
+
+			&:hover {
+				color: @main-color;
+			}
+		}
+	}
+}

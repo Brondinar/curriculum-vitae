@@ -29,6 +29,10 @@
 			&:not(:first-of-type)::before {
 				.horizontal-right-line();
 			}
+
+			&.header-links__a_open {
+				color: @secondary-color;
+			}
 		}
 	}
 }
@@ -43,7 +47,8 @@
 		max-width: @width-1023;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
-		z-index: 100;
+		box-shadow: 0 0 25px @main-shadow;
+		z-index: 200;
 
 		.header-links {
 			grid-template-rows: none;

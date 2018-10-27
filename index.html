@@ -10,21 +10,21 @@
 			<div id="main-card" class="card">
 				<div class="header card">
 					<div class="header-links">
-						<a class="link header-links__a" href="#about-card">
+						<a class="link nav-link header-links__a header-links__a_open" href="#about-card">
 							<span class="icon fas fa-user"></span>
-							<span class="text">Обо мне</span>
+							<span>Обо мне</span>
 						</a>
-						<a class="link header-links__a" href="#resume-card">
+						<a class="link nav-link header-links__a" href="#resume-card">
 							<span class="icon fas fa-file-alt"></span>
-							<span class="text">Резюме</span>
+							<span>Резюме</span>
 						</a>
-						<a class="link header-links__a" href="#works-card">
+						<a class="link nav-link header-links__a" href="#works-card">
 							<span class="icon fas fa-paint-brush"></span>
-							<span class="text">Работы</span>
+							<span>Работы</span>
 						</a>
-						<a class="link header-links__a" href="#contacts-card">
+						<a class="link nav-link header-links__a" href="#contacts-card">
 							<span class="icon fas fa-at"></span>
-							<span class="text">Связь</span>
+							<span>Связь</span>
 						</a>
 					</div>
 				</div>
@@ -42,12 +42,12 @@
 					</div>
 				</div>
 				<div class="links">
-					<a class="link links__a" href="#">Что-то еще</a>
-					<a class="link links__a" href="#">Контакты</span></a>
+					<a class="link links__a" href="#">Скачать резюме <span class="icon fas fa-download"></span></a>
+					<a class="link nav-link links__a" href="#contacts-card">Написать <span class="icon arrow"></span></a>
 				</div>
 			</div>
 
-			<div id="about-card" class="card inner-card">
+			<div id="about-card" class="card inner-card inner-card_open">
 				<div class="scrollable-area">
 					<div class="inner-card-content">
 						<div class="article about-me">
@@ -55,15 +55,15 @@
 							<div class="article-content">
 								<p class="text text-about">Молодой и амбициозный разработчик, способный при достаточно интересной задаче отключиться от окружающего мира. Занимаюсь фронтендом, бэкендом, люблю копаться в алгоритмах и других страшных вещах.</p>
 								<div class="shirt-info">
-									<p><strong>Возраст . . . . . </strong><span class="age__span">21</span></p>
-									<p><strong>Гражданство . . . . . </strong>Украина</p>
-									<p><strong>Пребывание . . . . . </strong>Воронеж, Россия</p>
+									<p><span class="strong-text">Возраст.....</span><span class="age__span">21</span></p>
+									<p><strong class="strong-text">Гражданство.....</strong>Украина</p>
+									<p><strong class="strong-text">Пребывание.....</strong>Воронеж</p>
 								</div>
 							</div>
 						</div>
 
 						<div class="article services">
-							<h2 class="heading">Мои Услуги</h2>
+							<h2 class="heading">Мои Способности</h2>
 							<div class="row article-content">
 								<div class="col col-2 block service-block">
 									<div class="icon-div"><span class="icon fab fa-css3"></span></div>
@@ -80,7 +80,7 @@
 								<div class="col col-2 block service-block">
 									<div class="icon-div"><span class="icon fas fa-server"></span></div>
 									<h3 class="strong-text">Бэкенд</h3>
-									<p class="text">Подключу проект к базе данных и напишу серверную логику.</p>
+									<p class="text">Подключу к проекту базу данных и напишу серверную логику.</p>
 								</div>
 							</div>
 						</div>
@@ -174,16 +174,101 @@
 				</div>
 			</div>
 
-			<div id="works-card" class="card inner-card">helloddddddddddddddddddddddddddddd</div>
+			<div id="works-card" class="card inner-card">
+				<div class="scrollable-area">
+					<div class="inner-card-content">
+						<div class="article works">
+							<h2 class="heading">Мои Работы</h2>
+							<div class="article-content row">
+								<div class="col col-2 block block-work">
+									<a class="image popup" href="#modal-1">
+										<img class="image__img" src="https://beshley.com/vcard/images/works/work1.jpg">
+										<div class="image__hover"><span class="icon fas fa-search"></span></div>
+									</a>
+									<a class="link work-title popup" href="#modal-1">«Арбат»</a>
+									<p class="small-text">Интернет-магазин</p>
+								</div>
 
-			<div id="contacts-card" class="card inner-card">hey aweryonedddddddddddddddddddddddddd</div>
+								<div class="col col-2 block block-work">
+									<a class="image popup" href="#modal-2">
+										<img class="image__img" src="img/bullscows.png">
+										<div class="image__hover"><span class="icon fas fa-search"></span></div>
+									</a>
+									<a class="link work-title popup" href="#modal-1">«Быки и Коровы»</a>
+									<p class="small-text">SPA</p>
+								</div>
+							</div>  
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="contacts-card" class="card inner-card">
+				<div class="scrollable-area">
+					<div class="inner-card-content">
+						<div class="article contacts">
+							<h2 class="heading">Обратная Связь</h2>
+							<div class="article-content row">
+								<div class="col col-1 block">
+									<form id="contact-form" class="contact-form" action="http://arbat-gorlovka.ru/api/send_message/" method="POST">
+										<input name="name" class="contact-form__name" type="text" placeholder="Полное имя" maxlength="255" required />
+										<input name="email" class="contact-form__email" type="email" placeholder="Email" maxlength="255" required />
+										<textarea name="message" class="contact-form__message" placeholder="Сообщение" maxlength="3000" required></textarea>
+										<a class="link contact-form__send" href="#">Отправить сообщение <span class="arrow"></span></a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
+
+		<div id="modal-1" class="modal">
+			<div class="modal-background modal-close"></div>
+			<div class="modal-window">
+				<div class="scrollable-area">
+					<div class="button_close modal-close"><span class="icon fas fa-times"></span></div>
+					<div class="modal-image">
+						<img class="modal-image__img" src="https://beshley.com/vcard/images/works/work1.jpg">
+					</div>
+					<div class="modal-description">
+						<h3 class="title">«Арбат»</h3>
+						<p class="text sub">Интернет-магазин</p>
+						<p class="text">Данный проект был разработан и реализован полностью мной для реально существующего предприятия. На стороне сервера задействован Django и PostgreSQL, на стороне клиента - jQuery, Bootstrap и различные плагины. Адаптивная вёрстка позволяет пользователям комфортно взаимодействовать с интерфейсом на различных устройствах.</p>
+						<p class="text">На данный момент интернет-магазин полноценно работает и успешно выполняет свои функции, но его еще планируется расширять вместе с ростом предприятия.</p>
+						<a class="link" href="http://arbat-gorlovka.ru" target="_blank">Посмотреть проект</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="modal-2" class="modal">
+			<div class="modal-background modal-close"></div>
+			<div class="modal-window">
+				<div class="scrollable-area">
+					<div class="button_close modal-close"><span class="icon fas fa-times"></span></div>
+					<div class="modal-image">
+						<img class="modal-image__img" src="img/bullscows.png">
+					</div>
+					<div class="modal-description">
+						<h3 class="title">«Быки и Коровы»</h3>
+						<p class="text sub">SPA</p>
+						<p class="text">Моя реализация известной игры с использованием Django Rest Framework и React. В приложении доступна возможность как попробовать угадать число, так и загадать его компьютеру.</p>
+						<p class="text">Попробуйте его обыграть!</p>
+						<a class="link" href="https://github.com/Brondinar/bulls-and-cows" target="_blank">Посмотреть код</a><br>
+						<a class="link" href="http://185.146.156.112" target="_blank">Посмотреть проект</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
 		<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
 		<script type="text/javascript" src="plugins/jquery.slimscroll.min.js"></script>
+		<script type="text/javascript" src="plugins/jquery.validate.min.js"></script>
 		<script src="scripts.js"></script>
 	</body>
 </html>

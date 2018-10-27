@@ -76,13 +76,17 @@ gulp.task('js-plugins', function() {
 
 gulp.task('js', gulp.series('js-plugins', function() {
 	return gulp.src(['js/**/*.js', '!js/**/*.min.js'])
-		.pipe(plumber())
-		.pipe(sourcemaps.init())
-		.pipe(rollup({plugins: [babel()]}, {format: 'iife'}))
+		// .pipe(plumber())
+		// .pipe(sourcemaps.init())
+		// .pipe(rollup({plugins: [babel()]}, {format: 'iife'}))
+		.pipe(babel({
+	      presets: ['@babel/preset-env']
+	    }))
 		.pipe(concat('scripts.js'))
-		.pipe(sourcemaps.write())
+		// .pipe(sourcemaps.write())
 		.pipe(gulp.dest(params.out))
-		.pipe(rollup({plugins: [uglify()]}, {format: 'iife'}))
+		// .pipe(rollup({plugins: [uglify()]}, {format: 'iife'}))
+		.pipe(uglify())
 		.pipe(rename('scripts.min.js'))
 		.pipe(gulp.dest(params.out))
 		.pipe(reload({ stream: true }));
