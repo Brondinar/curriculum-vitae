@@ -39,6 +39,12 @@ $().ready(() => {
 	}
 
 	if (window.matchMedia('(max-width: 560px)').matches) {
+		// Header is fixed. We need to change its width directly
+		let rootWidth = $('.root').width();
+
+		$('.header').width(rootWidth);
+
+		// Change two-columns divs to one-column
 		$.each($('.col-2'), (i, col) => {
 			$(col).removeClass('col-2');
 			$(col).addClass('col-1');
