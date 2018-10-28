@@ -2,14 +2,14 @@ $().ready(() => {
 	let $activeLink = $('.header-links__a_open');
 
 	if (window.matchMedia('(min-width: 1024px)').matches) {
-		// Свой scrollbar из плагина jquery slimscroll
+		// Custom scrollbar from jquery slimscroll plugin
 		$('.scrollable-area').slimScroll({
 			'height': '100%'
 		});
 
 		let $cardOpen = $($activeLink.attr('href'));
 
-		// Открыть нужную вкладку по клику на header
+		// Open appropriate card after click on .nav-link
 		$('.nav-link').click((e) => {
 			let href = $(e.target).closest('.nav-link').attr('href');
 			let $card = $(href);
@@ -22,12 +22,12 @@ $().ready(() => {
 			return false;
 		});
 	} else if (window.matchMedia('(max-width: 1023px)').matches) {
-		// Свой scrollbar для модальных окон
+		// Custom scrollbar for modal window from jquery slimscroll plugin
 		$('.modal-window .scrollable-area').slimScroll({
 			'height': '100%'
 		});
 
-		// Прокрутка с учетом высоты header
+		// Scroll to appropriate card taking into account .nav-menu height
 		$('.nav-link').click((e) => {
 			let headerHeight = $('#main-card').offset().top;
 			let href = $(e.target).closest('.nav-link').attr('href');
@@ -45,7 +45,7 @@ $().ready(() => {
 		});
 	}
 
-	// Сделать активной нажатую ссылку в header
+	// Make appropriate tab active
 	$('.nav-link').click((e) => {
 		let href = $(e.target).closest('.nav-link').attr('href');
 		let $link = $('.header-links').find(`.header-links__a[href='${href}']`);
@@ -58,7 +58,7 @@ $().ready(() => {
 		return false;
 	});
 
-	// Открыть модальное окно при клике на popup
+	// Open modal window
 	$('.popup').click((e) => {
 		if (!e.target.closest('.popup')) return;
 
@@ -69,12 +69,12 @@ $().ready(() => {
 		return false;
 	});
 
-	// Закрыть модальное окно при клике за его пределами
+	// Close modal window
 	$('.modal-close').click((e) => {
 		$(e.target.closest('.modal')).css('visibility', 'hidden');
 	});
 	
-	// Валидация формы обратной связи
+	// Form validation from jquery validate plugin
 	$('#contact-form').validate({
 		messages: {
 			name: '',
@@ -83,13 +83,15 @@ $().ready(() => {
 		}
 	});
 
-	// Отправка формы
+	// Submit form
 	$('.contact-form__send').click((e) => {
 		let $form = $(e.target).closest('.contact-form');
+		
 		if ($form.valid()) {
 			let data = $form.serializeArray()
 			let sdata = {}
 
+			// Serialize form data to necessary format
 			$.each(data, (i, field) => {
 				Object.assign(sdata, { [field.name]: field.value });
 			});
