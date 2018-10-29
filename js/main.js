@@ -1,130 +1,120 @@
 $().ready(() => {
-	let $activeLink = $('.header-links__a_open');
+  // Window resize handler
+  $(window).resize(() => {
+    $('.nav-link').off('click', handlerLinkClick);
+    $('.scrollable-area').slimScroll({ destroy: true });
 
-	if (window.matchMedia('(min-width: 1024px)').matches) {
-		// Custom scrollbar from jquery slimscroll plugin
-		$('.scrollable-area').slimScroll({
-			'height': '100%'
-		});
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+      $('.scrollable-area').slimScroll({
+        'height': '100%'
+      });
 
-		let $cardOpen = $($activeLink.attr('href'));
+      $('.nav-link').on('click', { orientation: 'album' }, handlerLinkClick);
+    } else if (window.matchMedia('(max-width: 1023px)').matches) {
+      $('.modal-window .scrollable-area').slimScroll({
+        'height': '100%'
+      });
 
-		// Open appropriate card after click on .nav-link
-		$('.nav-link').click((e) => {
-			let href = $(e.target).closest('.nav-link').attr('href');
-			let $card = $(href);
+      $('.nav-link').on('click', { orientation: 'portrait' }, handlerLinkClick);
+    }
 
-			$cardOpen.toggleClass('inner-card_open');
-			$card.toggleClass('inner-card_open');
+    if (window.matchMedia('(max-width: 560px)').matches) {
+      // Header is fixed. We need to change its width directly
+      let rootWidth = $('.root').width();
+      $('.header').width(rootWidth);
+    } else {
+      $('.header').attr('style', '');
+    }
+  });
 
-			$cardOpen = $card;
+  $(window).trigger('resize');
 
-			return false;
-		});
-	} else if (window.matchMedia('(max-width: 1023px)').matches) {
-		// Custom scrollbar for modal window from jquery slimscroll plugin
-		$('.modal-window .scrollable-area').slimScroll({
-			'height': '100%'
-		});
+  function handlerLinkClick(e) {
+    let orientation = e.data.orientation;
+    let $activeLink = $('.header-links__a_open');
+    let href = $(e.target).closest('.nav-link').attr('href');
+    let $link = $('.header-links').find(`.header-links__a[href='${href}']`);
+    let $card = $(href);
 
-		// Scroll to appropriate card taking into account .nav-menu height
-		$('.nav-link').click((e) => {
-			let headerHeight = $('#main-card').offset().top;
-			let href = $(e.target).closest('.nav-link').attr('href');
-			let $card = $(href);
-			let cardY = $card.offset().top - headerHeight;
+    $activeLink.removeClass('header-links__a_open');
+    $link.addClass('header-links__a_open');
 
-			window.scroll(0, cardY);
-		});
-	}
+    if (orientation === 'album') {
+      let $cardOpen = $('.inner-card_open');
 
-	if (window.matchMedia('(max-width: 560px)').matches) {
-		// Header is fixed. We need to change its width directly
-		let rootWidth = $('.root').width();
+      $cardOpen.removeClass('inner-card_open');
+      $card.addClass('inner-card_open');
+    } else if (orientation === 'portrait') {
+      let headerHeight = $('#main-card').offset().top;
+      let cardY = $card.offset().top - headerHeight;
 
-		$('.header').width(rootWidth);
+      window.scroll(0, cardY);
+    }
 
-		// Change two-columns divs to one-column
-		$.each($('.col-2'), (i, col) => {
-			$(col).removeClass('col-2');
-			$(col).addClass('col-1');
-		});
-	}
+    return false;
+  }
 
-	// Make appropriate tab active
-	$('.nav-link').click((e) => {
-		let href = $(e.target).closest('.nav-link').attr('href');
-		let $link = $('.header-links').find(`.header-links__a[href='${href}']`);
+  // Open modal window
+  $('.popup').click((e) => {
+    if (!e.target.closest('.popup')) return;
 
-		$activeLink.toggleClass('header-links__a_open');
-		$link.toggleClass('header-links__a_open');
+    let modal = $(e.target.closest('.popup')).attr('href');
 
-		$activeLink = $link;
+    $(modal).css('visibility', 'visible');
 
-		return false;
-	});
+    return false;
+  });
 
-	// Open modal window
-	$('.popup').click((e) => {
-		if (!e.target.closest('.popup')) return;
+  // Close modal window
+  $('.modal-close').click((e) => {
+    $(e.target.closest('.modal')).css('visibility', 'hidden');
+  });
 
-		let modal = $(e.target.closest('.popup')).attr('href');
+  // Form validation from jquery validate plugin
+  $('#contact-form').validate({
+    messages: {
+      name: '',
+      email: '',
+      message: ''
+    }
+  });
 
-		$(modal).css('visibility', 'visible');
+  // Submit form
+  $('.contact-form__send').click((e) => {
+    let $form = $(e.target).closest('.contact-form');
 
-		return false;
-	});
+    if ($form.valid()) {
+      let data = $form.serializeArray()
+      let sdata = {}
 
-	// Close modal window
-	$('.modal-close').click((e) => {
-		$(e.target.closest('.modal')).css('visibility', 'hidden');
-	});
-	
-	// Form validation from jquery validate plugin
-	$('#contact-form').validate({
-		messages: {
-			name: '',
-			email: '',
-			message: ''
-		}
-	});
+      // Serialize form data to necessary format
+      $.each(data, (i, field) => {
+        Object.assign(sdata, { [field.name]: field.value });
+      });
 
-	// Submit form
-	$('.contact-form__send').click((e) => {
-		let $form = $(e.target).closest('.contact-form');
-		
-		if ($form.valid()) {
-			let data = $form.serializeArray()
-			let sdata = {}
+      sdata = JSON.stringify(sdata);
 
-			// Serialize form data to necessary format
-			$.each(data, (i, field) => {
-				Object.assign(sdata, { [field.name]: field.value });
-			});
-
-			sdata = JSON.stringify(sdata);
-
-			$.ajax({
-				url: $form.attr('action'),
-				type: $form.attr('method'),
-				contentType: 'application/json',
-				data: sdata,
-				success: (data) => {
-					$form[0].reset();
-					$form.append(`<p class="contact-form__response contact-form__response_success">
-						Сообщение успешно отправлено!</p>`)
-				},
-				error: (errors) => {
-					console.log(errors);
-					$form.append(`<p class="contact-form__response contact-form__response_error">
-						Не удалось отправить сообщение!</p>`)
-				},
-				complete: () => {
-					setTimeout(() => {
-						$form.find('.contact-form__response').remove();
-					}, 5000);
-				}
-			});
-		}
-	});
+      $.ajax({
+        url: $form.attr('action'),
+        type: $form.attr('method'),
+        contentType: 'application/json',
+        data: sdata,
+        success: (data) => {
+          $form[0].reset();
+          $form.append(`<p class="contact-form__response contact-form__response_success">
+            Сообщение успешно отправлено!</p>`)
+        },
+        error: (errors) => {
+          console.log(errors);
+          $form.append(`<p class="contact-form__response contact-form__response_error">
+            Не удалось отправить сообщение!</p>`)
+        },
+        complete: () => {
+          setTimeout(() => {
+            $form.find('.contact-form__response').remove();
+          }, 5000);
+        }
+      });
+    }
+  });
 });
