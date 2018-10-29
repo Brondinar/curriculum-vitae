@@ -35,3 +35,19 @@
 		}
 	}
 }
+
+@media (max-width: 560px) {
+	.col {
+		width: 100% !important;
+
+		&:not(:first-of-type) {
+			&::before {
+				.horizontal-line();
+			}
+		}
+
+		&::after {
+			content: none !important;
+		}
+	}
+}
