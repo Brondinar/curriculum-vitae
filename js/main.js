@@ -1,3 +1,35 @@
+const getAge = () => {
+  const born = new Date(1997, 4, 29);
+  const now = new Date();
+
+  return Math.floor((now - born) / (1000 * 60 * 60 * 24 * 365));
+};
+
+function handlerLinkClick(e) {
+  let orientation = e.data.orientation;
+  let $activeLink = $('.header-links__a_open');
+  let href = $(e.target).closest('.nav-link').attr('href');
+  let $link = $('.header-links').find(`.header-links__a[href='${href}']`);
+  let $card = $(href);
+
+  $activeLink.removeClass('header-links__a_open');
+  $link.addClass('header-links__a_open');
+
+  if (orientation === 'album') {
+      let $cardOpen = $('.inner-card_open');
+
+      $cardOpen.removeClass('inner-card_open');
+      $card.addClass('inner-card_open');
+  } else if (orientation === 'portrait') {
+      let headerHeight = $('#main-card').offset().top;
+      let cardY = $card.offset().top - headerHeight;
+
+      window.scroll(0, cardY);
+  }
+
+  return false;
+}
+
 $().ready(() => {
   // Window resize handler
   $(window).resize(() => {
@@ -29,30 +61,7 @@ $().ready(() => {
 
   $(window).trigger('resize');
 
-  function handlerLinkClick(e) {
-    let orientation = e.data.orientation;
-    let $activeLink = $('.header-links__a_open');
-    let href = $(e.target).closest('.nav-link').attr('href');
-    let $link = $('.header-links').find(`.header-links__a[href='${href}']`);
-    let $card = $(href);
-
-    $activeLink.removeClass('header-links__a_open');
-    $link.addClass('header-links__a_open');
-
-    if (orientation === 'album') {
-      let $cardOpen = $('.inner-card_open');
-
-      $cardOpen.removeClass('inner-card_open');
-      $card.addClass('inner-card_open');
-    } else if (orientation === 'portrait') {
-      let headerHeight = $('#main-card').offset().top;
-      let cardY = $card.offset().top - headerHeight;
-
-      window.scroll(0, cardY);
-    }
-
-    return false;
-  }
+  $('.age__span').text(getAge());
 
   // Open modal window
   $('.popup').click((e) => {
